@@ -181,25 +181,38 @@ header h1 {
 }
 
 /* Botões de adicionar, calcular e exportar */
-.btn-add, .btn-calculate, .btn-pdf {
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.actions .btn {
     color: #fff;
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background-color: #007bff;
 }
 
+.btn-add {
+    background-color: #28a745;
+}
+
 .btn-add:hover {
-    background-color: #0056b3;
+    background-color: #218838;
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
@@ -223,6 +236,10 @@ header h1 {
     background-color: #138496;
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.actions .btn i {
+    font-size: 20px;
 }
 
 /* Resultado */
@@ -257,11 +274,9 @@ header h1 {
         align-items: stretch;
     }
 
-    .btn-add,
-    .btn-calculate,
-    .btn-pdf {
-        width: 100%;
-        text-align: center;
+    .actions {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
@@ -285,5 +300,140 @@ header h1 {
 
     .resultado {
         font-size: 16px;
+    }
+}
+
+/* Estilização para a seção de quantidade de itens */
+.section {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.item-header h2 {
+    font-size: 20px;
+    color: #007bff;
+}
+
+.item-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Botão de exclusão */
+.btn-delete {
+    background: #dc3545;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.btn-delete i {
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* Estilização dos resultados */
+.resultado-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resultado-section h3 {
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.resultado-section p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .item-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* Responsividade para a seção de quantidade de itens */
+@media (max-width: 768px) {
+    .item-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input-group {
+        width: 100%;
     }
 }

@@ -47,11 +47,11 @@ const App = () => {
   const [resultado, setResultado] = useState(null);
 
   const adicionarSecao = () => {
-    setItems([...items, { largura: '', altura: '', quantidade: 1 }]);
+    setItems([...items, { nome: '', largura: '', altura: '', quantidade: 1 }]);
   };
 
-  const adicionarTamanho = (largura, altura) => {
-    setItems([...items, { largura, altura, quantidade: 1 }]);
+  const adicionarTamanho = (nome, largura, altura) => {
+    setItems([...items, { nome, largura, altura, quantidade: 1 }]);
   };
 
   const handleChange = (index, field, value) => {
@@ -67,6 +67,7 @@ const App = () => {
 
   const calcularAltura = () => {
     let alturaTotal = 0;
+    let valorPorItemTotal = 0;
     const larguraFixa = 57;
     let resultadoIndividual = '';
 
@@ -83,10 +84,11 @@ const App = () => {
         const valorPorItem = valorTotalSeccao / quantidade;
 
         alturaTotal += alturaNecessaria;
+        valorPorItemTotal += valorPorItem;
 
         resultadoIndividual += `
-          <div>
-            <h2>Seção ${index + 1}</h2>
+          <div class="resultado-section">
+            <h3>${item.nome} - Seção ${index + 1}</h3>
             <p>Altura Necessária: ${alturaNecessaria.toFixed(2)} cm</p>
             <p>Valor por Item: R$ ${valorPorItem.toFixed(2)}</p>
             <p>Valor Total da Seção: R$ ${valorTotalSeccao.toFixed(2)}</p>
@@ -103,6 +105,7 @@ const App = () => {
       <h2>Resultado Final</h2>
       <p>Altura Total Necessária: ${alturaTotal.toFixed(2)} cm (${metrosTotal.toFixed(2)} metros)</p>
       <p>Valor Total: R$ ${valorTotalFinal.toFixed(2)}</p>
+      <p><strong>Valor por Item Total: R$ ${valorPorItemTotal.toFixed(2)}</strong></p>
     `);
   };
 
@@ -165,29 +168,52 @@ const App = () => {
         <p>Use os botões abaixo para adicionar seções pré-definidas ou personalize suas próprias.</p>
       </div>
       <div className="card-selection">
-        <button className="card-btn" onClick={() => adicionarTamanho(10, 10)}>
+        <button className="card-btn" onClick={() => adicionarTamanho('Escudo', 10, 10)}>
           <i className="fas fa-shield-alt"></i> Escudo (10x10 cm)
         </button>
-        <button className="card-btn" onClick={() => adicionarTamanho(21, 29.7)}>
+        <button className="card-btn" onClick={() => adicionarTamanho('A4', 21, 29.7)}>
           <i className="fas fa-file-alt"></i> A4 (29.7x21 cm)
         </button>
-        <button className="card-btn" onClick={() => adicionarTamanho(29.7, 42)}>
+        <button className="card-btn" onClick={() => adicionarTamanho('A3', 29.7, 42)}>
           <i className="fas fa-file-alt"></i> A3 (42x29.7 cm)
         </button>
       </div>
       <div className="itens-container">
         {items.map((item, index) => (
           <div className="section" key={index}>
-            <button className="remove-button" onClick={() => handleRemove(index)}>
-              <i className="fas fa-trash-alt"></i>
-            </button>
-            <h2>Quantidade de Itens {index + 1}:</h2>
-            <label>Quantidade:</label>
-            <input type="number" value={item.quantidade} min="1" onChange={(e) => handleChange(index, 'quantidade', e.target.value)} />
-            <label>Largura do item (cm):</label>
-            <input type="number" value={item.largura} onChange={(e) => handleChange(index, 'largura', e.target.value)} />
-            <label>Altura do item (cm):</label>
-            <input type="number" value={item.altura} onChange={(e) => handleChange(index, 'altura', e.target.value)} />
+            <div className="item-header">
+              <h2>{item.nome} - Item {index + 1}</h2>
+              <button className="btn-delete" onClick={() => handleRemove(index)}>
+                <i className="fas fa-trash-alt"></i>
+              </button>
+            </div>
+            <div className="item-group">
+              <div className="input-group">
+                <label>Quantidade:</label>
+                <input
+                  type="number"
+                  value={item.quantidade}
+                  min="1"
+                  onChange={(e) => handleChange(index, 'quantidade', e.target.value)}
+                />
+              </div>
+              <div className="input-group">
+                <label>Largura do item (cm):</label>
+                <input
+                  type="number"
+                  value={item.largura}
+                  onChange={(e) => handleChange(index, 'largura', e.target.value)}
+                />
+              </div>
+              <div className="input-group">
+                <label>Altura do item (cm):</label>
+                <input
+                  type="number"
+                  value={item.altura}
+                  onChange={(e) => handleChange(index, 'altura', e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -202,7 +228,7 @@ const App = () => {
           <i className="fas fa-file-pdf"></i> Exportar PDF
         </button>
       </div>
-      <div id="resultado" dangerouslySetInnerHTML={{ __html: resultado }}></div>
+      <div id="resultado" className="resultado" dangerouslySetInnerHTML={{ __html: resultado }}></div>
     </div>
   );
 };
