@@ -99,53 +99,29 @@ header h1 {
     font-size: 18px;
 }
 
-/* Container de itens */
-.itens-container {
+/* Grupo de itens */
+.form-group {
     width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 15px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Seção de itens */
-.section {
-    position: relative;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    background-color: #fafafa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
+/* Grupo de um item específico */
+.item-group {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    align-items: center;
 }
 
-/* Título da seção */
-.section h2 {
-    margin: 0;
-    font-size: 18px;
-    color: #007bff;
-    text-align: center;
-}
-
-/* Labels e inputs */
-.section label {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.section input {
+.item-group input {
     width: 100%;
-    max-width: 300px;
+    max-width: 150px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -155,20 +131,16 @@ header h1 {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.section input:focus {
+.item-group input:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Botão de remover */
-.remove-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.btn-delete {
     background: #dc3545;
     border: none;
     border-radius: 50%;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -180,29 +152,20 @@ header h1 {
     height: 40px;
 }
 
-.remove-button i {
+.btn-delete i {
     color: #fff;
 }
 
-.remove-button:hover {
+.btn-delete:hover {
     background-color: #c82333;
     transform: scale(1.05);
 }
 
-.remove-button:active {
+.btn-delete:active {
     background-color: #bd2130;
 }
 
-/* Botões de ação */
-.actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.actions .btn {
+.btn-add {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -210,25 +173,39 @@ header h1 {
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
-.actions .btn:hover {
+.btn-add:hover {
     background-color: #0056b3;
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.actions .btn i {
-    font-size: 18px;
+/* Botão de calcular */
+.btn-calculate {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.btn-calculate:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Resultado */
-#resultado {
+.resultado {
     margin-top: 20px;
     background-color: #ffffff;
     padding: 20px;
@@ -242,6 +219,38 @@ header h1 {
     color: #007bff;
 }
 
+/* Canvas para desenho */
+.canvas-drawing {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+/* Botão para exportar PDF */
+.btn-pdf {
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.btn-pdf:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .card-selection {
@@ -249,13 +258,20 @@ header h1 {
         align-items: center;
     }
 
-    .actions {
-        flex-direction: column;
+    .form-group {
         align-items: center;
     }
 
-    .container {
-        padding: 15px;
+    .item-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-add,
+    .btn-calculate,
+    .btn-pdf {
+        width: 100%;
+        text-align: center;
     }
 }
 
@@ -268,19 +284,4 @@ header h1 {
     .actions .btn {
         font-size: 14px;
     }
-}
-
-/* Notificações */
-.notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    font-size: 16px;
 }

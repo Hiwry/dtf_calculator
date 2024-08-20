@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './styles.css';
@@ -45,7 +45,6 @@ const calcularEspacoOtimizado = (larguraItem, alturaItem, quantidade, larguraFix
 const App = () => {
   const [items, setItems] = useState([]);
   const [resultado, setResultado] = useState(null);
-  const canvasRef = useRef(null);
 
   const adicionarSecao = () => {
     setItems([...items, { largura: '', altura: '', quantidade: 1 }]);
@@ -69,7 +68,6 @@ const App = () => {
   const calcularAltura = () => {
     let alturaTotal = 0;
     const larguraFixa = 57;
-    let valorTotal = 0;
     let resultadoIndividual = '';
 
     items.forEach((item, index) => {
@@ -94,8 +92,6 @@ const App = () => {
             <p>Valor Total da Seção: R$ ${valorTotalSeccao.toFixed(2)}</p>
           </div>
         `;
-
-        valorTotal += valorTotalSeccao;
       }
     });
 
@@ -108,8 +104,6 @@ const App = () => {
       <p>Altura Total Necessária: ${alturaTotal.toFixed(2)} cm (${metrosTotal.toFixed(2)} metros)</p>
       <p>Valor Total: R$ ${valorTotalFinal.toFixed(2)}</p>
     `);
-
-    desenharCanvas(items);
   };
 
   const calcularValorPorItem = (metros) => {
@@ -145,46 +139,6 @@ const App = () => {
     else if (metros >= 10) valor = metros * valoresMetro.acima;
 
     return parseFloat(valor);
-  };
-
-  const desenharCanvas = (items) => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const scale = 10;
-    const larguraFixa = 57 * scale;
-    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#33FFF5'];
-
-    const allItems = [];
-    items.forEach((item, index) => {
-      const largura = parseFloat(item.largura) * scale;
-      const altura = parseFloat(item.altura) * scale;
-      const quantidade = parseInt(item.quantidade, 10);
-
-      for (let i = 0; i < quantidade; i++) {
-        allItems.push({ width: largura, height: altura, index });
-      }
-    });
-
-    const result = calcularEspacoOtimizado(
-      parseFloat(items[0].largura) * scale,
-      parseFloat(items[0].altura) * scale,
-      parseInt(items[0].quantidade, 10),
-      larguraFixa,
-      1 * scale
-    );
-
-    result.bins.forEach((bin, binIndex) => {
-      bin.items.forEach((item, itemIndex) => {
-        const color = colors[(binIndex + itemIndex) % colors.length];
-        ctx.fillStyle = color;
-        ctx.fillRect(item.x, item.y, item.width, item.height);
-      });
-    });
-
-    const canvasHeight = result.bins.reduce((max, bin) => Math.max(max, bin.height), 0);
-    canvas.height = canvasHeight;
   };
 
   const exportarPDF = () => {
@@ -249,7 +203,6 @@ const App = () => {
         </button>
       </div>
       <div id="resultado" dangerouslySetInnerHTML={{ __html: resultado }}></div>
-      <canvas ref={canvasRef} width={570} height={1000}></canvas>
     </div>
   );
 };
