@@ -70,36 +70,40 @@ const App = () => {
     let valorPorItemTotal = 0;
     const larguraFixa = 57;
     let resultadoIndividual = '';
-
+  
     items.forEach((item, index) => {
       const largura = parseFloat(item.largura);
       const altura = parseFloat(item.altura);
       const quantidade = parseInt(item.quantidade, 10);
-
+  
       if (!isNaN(largura) && !isNaN(altura) && !isNaN(quantidade)) {
         const otimizado = calcularEspacoOtimizado(largura, altura, quantidade, larguraFixa, 1);
         const alturaNecessaria = otimizado.alturaNecessaria;
         const metros = alturaNecessaria / 100;
         const valorTotalSeccao = calcularValorPorItem(metros);
         const valorPorItem = valorTotalSeccao / quantidade;
-
+  
         alturaTotal += alturaNecessaria;
         valorPorItemTotal += valorPorItem;
-
+  
+        // Verifique se 'itens' existe antes de tentar acessar 'filter'
+        const itensRotacionados = otimizado.itens ? otimizado.itens.filter(i => i.rotacionado).length : 0;
+  
         resultadoIndividual += `
           <div class="resultado-section">
             <h3>${item.nome} - Seção ${index + 1}</h3>
             <p>Altura Necessária: ${alturaNecessaria.toFixed(2)} cm</p>
             <p>Valor por Item: R$ ${valorPorItem.toFixed(2)}</p>
             <p>Valor Total da Seção: R$ ${valorTotalSeccao.toFixed(2)}</p>
+            <p>Itens Rotacionados: ${itensRotacionados}</p>
           </div>
         `;
       }
     });
-
+  
     const metrosTotal = alturaTotal / 100;
     const valorTotalFinal = calcularValorPorItem(metrosTotal);
-
+  
     setResultado(`
       ${resultadoIndividual}
       <h2>Resultado Final</h2>
@@ -108,7 +112,8 @@ const App = () => {
       <p><strong>Valor por Item Total: R$ ${valorPorItemTotal.toFixed(2)}</strong></p>
     `);
   };
-
+  
+  
   const calcularValorPorItem = (metros) => {
     const valoresSalvos = JSON.parse(localStorage.getItem('valores')) || {};
 
@@ -124,7 +129,7 @@ const App = () => {
       '1-2': 90,
       '2-5': 85,
       '5-10': 80,
-      acima: 75
+      acima: 70
     };
 
     let valor = 0;
