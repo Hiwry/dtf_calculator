@@ -14,6 +14,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    min-height: 100vh;
 }
 
 /* Header */
@@ -30,7 +31,10 @@ header {
 }
 
 header h1 {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Guia Rápido */
@@ -48,12 +52,15 @@ header h1 {
 
 .mini-guide h2 {
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 22px;
     color: #007bff;
+    text-transform: uppercase;
 }
 
 .mini-guide p {
     font-size: 16px;
+    color: #555;
+    line-height: 1.6;
 }
 
 /* Container principal */
@@ -78,25 +85,27 @@ header h1 {
     background-color: #28a745;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 8px;
+    padding: 12px 24px;
     cursor: pointer;
     font-size: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .card-btn:hover {
     background-color: #218838;
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card-btn i {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* Grupo de itens */
@@ -109,7 +118,12 @@ header h1 {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-group:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Grupo de um item específico */
@@ -124,7 +138,7 @@ header h1 {
     max-width: 150px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 14px;
     color: #333;
     background-color: #fff;
@@ -133,9 +147,10 @@ header h1 {
 
 .item-group input:focus {
     border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
+/* Botão de exclusão */
 .btn-delete {
     background: #dc3545;
     border: none;
@@ -165,43 +180,49 @@ header h1 {
     background-color: #bd2130;
 }
 
-.btn-add {
-    background-color: #007bff;
+/* Botões de adicionar, calcular e exportar */
+.btn-add, .btn-calculate, .btn-pdf {
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 8px;
+    padding: 12px 24px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-add {
+    background-color: #007bff;
 }
 
 .btn-add:hover {
     background-color: #0056b3;
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Botão de calcular */
 .btn-calculate {
     background-color: #ffc107;
     color: #333;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
 }
 
 .btn-calculate:hover {
     background-color: #e0a800;
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-pdf {
+    background-color: #17a2b8;
+}
+
+.btn-pdf:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Resultado */
@@ -210,45 +231,14 @@ header h1 {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
     font-size: 18px;
     color: #007bff;
-}
-
-/* Canvas para desenho */
-.canvas-drawing {
-    margin-top: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-}
-
-/* Botão para exportar PDF */
-.btn-pdf {
-    background-color: #17a2b8;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-.btn-pdf:hover {
-    background-color: #138496;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    line-height: 1.8;
 }
 
 /* Responsividade */
@@ -283,5 +273,17 @@ header h1 {
 
     .actions .btn {
         font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .mini-guide h2 {
+        font-size: 18px;
+    }
+
+    .resultado {
+        font-size: 16px;
     }
 }
